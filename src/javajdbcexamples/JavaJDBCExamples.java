@@ -120,4 +120,70 @@ public class JavaJDBCExamples {
       System.out.println("Operation done successfully");
       return tableData;
    }
+    public List<String[]> SelectDataEmployee(String query){
+    Statement stmt = null;
+    List<String[]> tableData=new ArrayList<String[]>();
+    try{
+    conn.setAutoCommit(false);
+    stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query);
+         while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String  name = rs.getString("name");
+            String[] temp={String.valueOf(id),name};
+            tableData.add(temp);
+         }
+         rs.close();
+         stmt.close();
+    } catch ( Exception e ) {
+        System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        System.exit(0);
+      }
+      System.out.println("Operation done successfully");
+      return tableData;
+   }
+    public List<String[]> SelectDataEmployeeWhereId(String idParam){
+    Statement stmt = null;
+    List<String[]> tableData=new ArrayList<String[]>();
+    try{
+    conn.setAutoCommit(false);
+    stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery( "SELECT * FROM employee where id="+idParam+";" );
+         while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String  name = rs.getString("name");
+            String[] temp={String.valueOf(id),name};
+            tableData.add(temp);
+         }
+         rs.close();
+         stmt.close();
+    } catch ( Exception e ) {
+        System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        System.exit(0);
+      }
+      System.out.println("Operation done successfully");
+      return tableData;
+   }
+    public List<String[]> SelectDataEmployeeWhereName(String nameParam){
+    Statement stmt = null;
+    List<String[]> tableData=new ArrayList<String[]>();
+    try{
+    conn.setAutoCommit(false);
+    stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery( "SELECT * FROM employee where name=\'"+nameParam+"\';" );
+         while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String  name = rs.getString("name");
+            String[] temp={String.valueOf(id),name};
+            tableData.add(temp);
+         }
+         rs.close();
+         stmt.close();
+    } catch ( Exception e ) {
+        System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+        System.exit(0);
+      }
+      System.out.println("Operation done successfully");
+      return tableData;
+   }
 }
